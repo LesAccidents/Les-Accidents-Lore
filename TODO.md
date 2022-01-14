@@ -4,8 +4,6 @@ List of things to do / change
 - then learn how to use github and then we're good to do commits on our own branch and merge requests when ready
 
 Saving feature:
--
-- Make it possible to save levels and stats in a slot
 - Save chapter progression in same slot
   - Make checkpoints in the form of sub chapters
 

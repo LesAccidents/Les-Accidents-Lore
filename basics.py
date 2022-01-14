@@ -1,7 +1,7 @@
 #A few important basic functions
 
 #import necessary libraries
-import os,sys,time,random#, pygame
+import os,sys,time,random
 
 #basic functions
 def screenClear():  #screen clearing function

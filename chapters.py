@@ -21,7 +21,7 @@ def c1():
     slowType("Les Accidents Inc. proudly presents:\n", 0.1)
     time.sleep(2.9)
     sound.music("intro")
-    bigText("LES ACCIDENTS:")
+    bigText("LES ACCIDENTS:", "white", "doom")
     time.sleep(8.3)
     bigText("THE GAME", "red")
     time.sleep(0.5)
@@ -45,12 +45,12 @@ def c1():
     slowType("\n\033[1;32;48m'Les Accidents'\033[1;37;48m",0.1)
     slowType("\nAs dramatic as I made that sound, les Accidents wasn't very, how shall I saw, 'le épique', at the beginning. This was due to multiple factors, but mostly the inactivity of Ali-Hassan, who was indulged in SnapHaram :vomit:. However, regular activity in les Accidents (then known as DaSexyDudes)included, but was not limited to, furry jokes, Roblox and Thanos jokes, Roblox shittery, and Mathieu getting scarred, leaving, and request a reinvite an hour later (through this experience one can deduce that Mathieu is in fact a closet masochist). These activities continued for the duration of summer 2019.")
     #1.2.1
-    slowType("\nThroughout the beginning of the sophomore year, the events in Les Accidents had sticken to the same pattern. However, it was the wish of the members to increase the activity of the group chat. Although Ali-Hassan had increased his activity in the GC and slowly fazed SnapSin out of his life, the GC still felt a bit empty.")
+    slowType("\nThroughout the beginning of the sophomore year, the events in Les Accidents had sticken to the same pattern. However, it was the wish of the members to increase the activity of the group chat. Although Ali-Hassan had appeared more often and increased his gayness levels, the GC still felt a bit empty.")
     pressEnter()
     screenClear()
     slowType("\n\033[1;36;48mEnter our newest character:\033[1;37;48m",0.06)
     slowType("\n\033[1;31;48mHadi!\033[1;37;48m",0.1)
-    slowType("\nHadi was at the time, a very energetic and positive, yet eccentric and monkeylike guy. It was hoped that his presence would reinvigorate the group chat. However, Hadi was unfortunately too involved in his love life, with a figure best left only mentionned as: 'The Witch'. Hadi couldn't provide any support, as he himself is said to have stated: 'L'amour, c'est du chocolat.' Unfortunately as stated by experts, he could not contribue to Les Accidents because 'he sinned more than Diego in Dora and the Lost City of Gold'.")
+    slowType("\nHadi was at the time, a very energetic and positive, yet eccentric and monkeylike guy. It was hoped that his presence would reinvigorate the group chat. However, Hadi was unfortunately too bewitched by women, with a figure best left only mentionned as: 'The Witch'. Hadi couldn't provide any support, as he himself is said to have stated: 'L'amour, c'est du chocolat.' Unfortunately as stated by experts, he could not contribue to Les Accidents because 'he sinned more than Diego in Dora and the Lost City of Gold'.")
     #1.2.2
     pressEnter()
     screenClear()
@@ -60,12 +60,11 @@ def c1():
     screenClear()
     slowType("\n\033[1;36;48mAnd so enters our newest character:\033[1;37;48m",0.06)
     slowType("\n\033[1;33;48mJacob!\033[1;37;48m", 0.1)
-    slowType("\nOnce Jacob joined, he was immediately greeted with a dubious image from a light novel. The following conversation ensued:")
-    slowType("\nJacob:Bro wtf, what is going on?!\nAdib:It's nothing.")
+    slowType("\nOnce Jacob joined, he was immediately greeted with a dubious image from a visual novel. The following conversation ensued:")
+    slowType("\nJacob: Bro wtf\nAdib: It's nothing.")
     slowType("\nIf Jacob was concerned by this, he had hidden it well, perhaps too well and for too long.")
     slowType("Because slowly and surely", 0.06)
-    slowType("\n\033[1;31;48mHe was consumed, no, some would say VORED, by Les Accidents\033[1;37;48m", 0.1)
-
+    slowType("\n\033[1;31;48mHe was consumed, vored, by Les Accidents\033[1;37;48m", 0.1)
 
     print("Would you like to preceed to the next chapter?")
     if confirm() == True:
