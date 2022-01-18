@@ -1,8 +1,7 @@
 #A few important basic functions
 
 #import necessary libraries
-import os,sys,time,random
-
+import os, sys, time, keyboard
 #basic functions
 def screenClear():  #screen clearing function
   # for mac and linux(here, os.name is 'posix')
@@ -23,11 +22,16 @@ def confirm(query="Are you sure? (y or n) "):
 
 def slowType(text, delay=0.03): #slowly prints text, and skipps to the end if a key is pressed (so far only ctrl+c). The default delay speed is 0.03, but this can be changed by adding this optionnal parameter. Ex: slowType('text') or slowType('text', 0.1)
     for letter in text:
-        try:
-            sys.stdout.write(letter)
-            sys.stdout.flush()
-            time.sleep(delay)
-        except KeyboardInterrupt: #only works with ctrl+c
-            delay = 0 #would like to add more possibilities with pygame but it's a bit broken..
+        #if keyboard.is_pressed('return'):  UNCOMMENT
+        #    unreturn = True
+        #    time.sleep(0.05)
+        #    delay = 0
+        #if unreturn == True:
+        #    letter = "\b" + letter
+        #    unreturn = False
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(delay)
+
 
 
