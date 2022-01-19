@@ -26,13 +26,17 @@ def savefile():
                     if os.path.isfile("LAL_saveSlots/slot"+str(slotSelection)+".txt") == True:
                         if confirm("Are you sure you want to delete this save file? It will be gone\033[1;31;48m F O R E V E R!!\033[1;37;48m (y or n):    ") == True:#confirmation
                             os.remove("LAL_saveSlots/slot"+slotSelection+".txt")    #deletes the file
+                            slowType("\nBombing save file...")
+                            time.sleep(1)
+                            slowType(" No survivors left.")
+                            slotSelection = "menu"
+                            time.sleep(0.5)
                     else:
                         c.red("That save file does not exist. Try again.")
                         time.sleep(1.5)
                         slotSelection = "menu"
                     break
 
-        
         #elif slotSelection.lower() == 'debug' or 'd':#REMOVE
          #   b.battle(Hussein(), Hadi())
           #  break
@@ -43,7 +47,10 @@ def savefile():
                 with open("LAL_saveSlots/slot"+slotSelection+".txt") as save_file:
                     data = json.load(save_file)
                     for i in data['player']: player = i['character'];
-                    return True #to skip character selection screen
+                    if player == "blank":
+                        return False
+                    else:
+                        return True #to skip character selection screen, if player is already chosen
                     time.sleep(1) #simulates loading time
                     slowType("Success.")
                     pressEnter()
@@ -130,6 +137,9 @@ def characterSelection():
             case _:
                 c.red("Please input a number displayed.")        
                 time.sleep(1.5)
+    save(slotSelection, player)
+
+def autosave():
     save(slotSelection, player)
 
 def save(slot, self='blank', newFile=False):
@@ -351,23 +361,23 @@ def levelUp(self):
         "E --- AGI")
         levelChoice=input()
         match levelChoice:
-            case levelChoice.lower()=="a" or "atk" or "1":
+            case "a" | "atk" | "1":
                 self.attack += 1
                 slowType("You have levelled up your attack. Congratulations, may you clap the cheeks of your enemies. Your attack is now", self.attack,".")
                 break
-            case levelChoice.lower()=="b" or "def" or "2":
+            case "b" | "def" | "2":
                 self.defence += 1
                 slowType("You have levelled up your defense. Congratulations, may you be able to tank more damage, you filthy masoschist. Your defense is now",self.attack,".")
                 break
-            case levelChoice.lower()=="c" or "int" or "3":
+            case "c" | "int" | "3":
                 self.intellect += 1
                 slowType("You have levelled up your intellect. Congratulations, you are evolving from monke to ape, may your gorilla powers manifest themselves. Your intellect is now",self.intellect,".")
                 break
-            case levelChoice.lower()=="d" or "cha" or "4":
+            case "d" | "cha" | "4":
                 self.charisma += 1
                 slowType("You have levelled up your charisma. Congratulations, you sexy beast, the laws of physics bend to your way with words :flushed:. Your charisma is now",self.charisma,".")
                 break
-            case levelChoice.lower()=="e" or "agi" or "5":
+            case "e" | "agi" | "5":
                 self.agility += 1
                 slowType("You have levelled up your agility. Congratulations, you speedy boi, may you move faster than le jongleur eventually.",self.agility,".")
                 break

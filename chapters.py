@@ -68,6 +68,7 @@ def c1():
 
     print("Would you like to preceed to the next chapter?")
     if confirm() == True:
+        p.autosave()
         c2()
 
 def c2():
