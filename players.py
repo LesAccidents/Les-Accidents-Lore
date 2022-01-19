@@ -140,6 +140,13 @@ def characterSelection():
     save(slotSelection, player)
 
 def autosave():
+    slowType("Preforming an autosave, just a moment...\n")
+    time.sleep(0.5)
+    with open("LAL_saveSlots/slot"+slotSelection+".txt") as save_file:
+        data = json.load(save_file)
+        for i in data['player']: player = i['character'];
+    player += "()"
+    print(player)
     save(slotSelection, player)
 
 def save(slot, self='blank', newFile=False):
@@ -161,6 +168,7 @@ def save(slot, self='blank', newFile=False):
         })
     else:
         slowType("Do not turn off the power. Saving your progress... ")
+        print(self)
         save['player'].append({
         'character': self.name,
         'level': self.level,
