@@ -11,10 +11,11 @@ def savefile():
             if os.path.isfile("LAL_saveSlots/slot"+str(i)+".txt"): #opens a file
                 with open("LAL_saveSlots/slot"+str(i)+".txt") as save_file: data = json.load(save_file) #reads it
                 for k in data['player']: name = k['character']; level = k['level'] #finds the name and level inside that save file
-                print("Slot "+str(i)+": "+name+", Level "+level) #prints that muzaphuka
+                print("Slot "+str(i)+": "+name+", Level "+str(level)) #prints that muzaphuka
             else: #if it does not find that file, it says empty
                 print("Slot "+str(i)+": --Empty--")
-            
+        
+        global slotSelection
         slotSelection = str(input("\nType the slot number of your save file (or 'delete'): ")) #asks what file you wanna use 
         if slotSelection.lower() == 'del' or slotSelection.lower() == 'delete': #checks if a file wants to be deleted
             while True:
@@ -25,16 +26,20 @@ def savefile():
                     if os.path.isfile("LAL_saveSlots/slot"+str(slotSelection)+".txt") == True:
                         if confirm("Are you sure you want to delete this save file? It will be gone\033[1;31;48m F O R E V E R!!\033[1;37;48m (y or n):    ") == True:#confirmation
                             os.remove("LAL_saveSlots/slot"+slotSelection+".txt")    #deletes the file
+                            slowType("\nBombing save file...")
+                            time.sleep(1)
+                            slowType(" No survivors left.")
+                            slotSelection = "menu"
+                            time.sleep(0.5)
                     else:
                         c.red("That save file does not exist. Try again.")
                         time.sleep(1.5)
                         slotSelection = "menu"
                     break
 
-        
-        elif slotSelection.lower() == 'debug' or 'd':#REMOVE
-            b.battle()
-            break
+        #elif slotSelection.lower() == 'debug' or 'd':#REMOVE
+         #   b.battle(Hussein(), Hadi())
+          #  break
         
         if slotSelection == '1' or slotSelection == '2' or slotSelection == '3':
             try: #tries the value inputted
@@ -42,7 +47,10 @@ def savefile():
                 with open("LAL_saveSlots/slot"+slotSelection+".txt") as save_file:
                     data = json.load(save_file)
                     for i in data['player']: player = i['character'];
-                    return True #to skip character selection screen
+                    if player == "blank":
+                        return False
+                    else:
+                        return True #to skip character selection screen, if player is already chosen
                     time.sleep(1) #simulates loading time
                     slowType("Success.")
                     pressEnter()
@@ -72,7 +80,7 @@ def characterSelection():
                 c.cyan('\nMoto: "Mumei best girl >:)"')
                 c.green("\nDominant trait: Overall Balanced\n")
                 pressEnter()
-                player = p.Adib()
+                player = Adib()
                 print(player)
                 if confirm() == True:
                     break
@@ -81,7 +89,7 @@ def characterSelection():
                 c.cyan('\nMoto: "Looks like I\'m gonna have to Miracle Johnson on you."')
                 c.green("\nDominant trait: Defence\n")
                 pressEnter()
-                player = p.Mathieu()
+                player = Mathieu()
                 print(player)
                 if confirm() == True:
                     break
@@ -90,7 +98,7 @@ def characterSelection():
                 c.cyan('\nMoto: "I\'m gonna Dust-eze out of here, the fish are calling me. *SCREECH*"')
                 c.green("\nDominant trait: Agility\n")
                 pressEnter()
-                player = p.Jacob()
+                player = Jacob()
                 print(player)
                 if confirm() == True:
                     break
@@ -99,7 +107,7 @@ def characterSelection():
                 c.cyan('\nMoto: "MY FEET ARE NUMB MAN! UEEEAAAAAAAHHHHHHHH!!"')
                 c.green("\nDominant trait: Charisma\n") 
                 pressEnter() 
-                player = p.Ali()
+                player = Ali()
                 print(player)
                 if confirm() == True:
                     break
@@ -111,7 +119,7 @@ def characterSelection():
                 c.cyan('\nMoto: "I\'m gonna have to finish you, I don\'t care about your #DISTAVIE."')
                 c.green("\nDominant trait: Intellect\n")
                 pressEnter()
-                player = p.Hadi()
+                player = Hadi()
                 print(player)
                 if confirm() == True:
                     break
@@ -120,15 +128,26 @@ def characterSelection():
                 c.cyan('\nMoto: "Ayo fait attention sinon je vais te sucer les fesses >:)"')
                 c.green("\nDominant trait: Attack\n")
                 pressEnter()
-                player = p.Hussein()
+                player = Hussein()
                 print(player)
                 if confirm() == True:
                     break
 
-                p.battle(p.Hussein(), p.Hadi())
+                b.battle(Hussein(), Hadi())
             case _:
                 c.red("Please input a number displayed.")        
                 time.sleep(1.5)
+    save(slotSelection, player)
+
+def autosave():
+    slowType("Preforming an autosave, just a moment...\n")
+    time.sleep(0.5)
+    with open("LAL_saveSlots/slot"+slotSelection+".txt") as save_file:
+        data = json.load(save_file)
+        for i in data['player']: player = i['character'];
+    player += "()"
+    print(player)
+    save(slotSelection, player)
 
 def save(slot, self='blank', newFile=False):
     save = {}
@@ -149,6 +168,7 @@ def save(slot, self='blank', newFile=False):
         })
     else:
         slowType("Do not turn off the power. Saving your progress... ")
+        print(self)
         save['player'].append({
         'character': self.name,
         'level': self.level,
@@ -160,16 +180,6 @@ def save(slot, self='blank', newFile=False):
         'intellect': self.intellect,
         'agility': self.agility,
         })
-
-#        self.attack = 3
-#        self.defence = 3
-#        self.charisma = 2
-#        self.intellect = 2
-#        self.agility = 3
-#        self.hp = 100
-#        self.xp = 0
-#        self.level = 1
-#        self.name = 'Adib'
 
     with open("LAL_saveSlots/slot"+slot+'.txt', 'w') as outfile:
         json.dump(save, outfile)
@@ -241,35 +251,6 @@ def xpBar(self, xp):
         xpAmountend += "-"
     self.xp = xpTotal
     print(xpAmountpre+xpAmountnew+xpAmountend+") "+str(xpTotal)+"%\nCurrent level: "+str(self.level)+"\nLevel up in: "+str(100-xpTotal)+"xp")
-
-
-def levelUp(self):
-  slowType("Congratulations monke man, you have levelled up!")
-  slowType("What would you like to improve? You have one",level_point,"to spend.\n"
-  "A --- ATK"
-  "B --- DEF"
-  "C --- INT"
-  "D --- CHA"
-  "E --- AGI")
-  levelChoice=input()
-  try:
-    if levelChoice=="A" or "ATK":
-      self.attack+=1
-      slowType("You have levelled up your attack. Congratulations, may you clap the cheeks of your enemies. Your attack is now", self.attack,".")
-    elif levelChoice=="B" or "DEF":
-      self.defence+=1
-      slowType("You have levelled up your defense. Congratulations, may you be able to tank more damage, you filthy masoschist. Your defense is now",self.attack,".")
-    elif levelChoice=="C" or "INT":
-      self.intellect+=1
-      slowType("You have levelled up your intellect. Congratulations, you are evolving from monke to ape, may your gorilla powers manifest themselves. Your intellect is now",self.intellect,".")
-    elif levelChoice=="D" or "CHA":
-      self.charisma+=1
-      slowType("You have levelled up your charisma. Congratulations, you sexy beast, the laws of physics bend to your way with words :flushed:. Your charisma is now",self.charisma,".")
-    elif levelChoice=="E" or "AGI":
-      self.agility+=1
-      slowType("You have levelled up your agility. Congratulations, you speedy boi, may you move faster than le jongleur eventually.",self.agility,".")
-  except ValueError:
-      slowType("Please select a valid option, note that the system is cap sensitive.")
 
 class Adib():
     def __init__(self): #overall balanced
@@ -354,7 +335,7 @@ class Hadi():
         self.xp = 0
         self.level = 1
         self.name = 'Hadi'
-        #self.moto = "I'm gonna have to finish you, I don't care about your #DISTAVIE."
+        self.moto = "I'm gonna have to finish you, I don't care about your #DISTAVIE."
 
     def __repr__(self):
         return stats(self)
@@ -371,41 +352,49 @@ class Hussein():
         self.xp = 0
         self.level = 1
         self.name = 'Hussein'
-        self.moto = "Ayo fait attention sinon je vais te sucer les fesses >:)"
+        self.moto = "Ayo fait attention sinon je vais te sucer les fesses"
 
     def __repr__(self):
         return stats(self)
 
-def levelUp(player):
-    print(stats(player))
-    print("Choose a stat to level up:\n'1' for Attack\n'2' for Defence\n'3' for Charisma\n'4' for Intellect\n'5' for Agility\n")
+def levelUp(self):
+    screenClear()
+    slowType("Congratulations monke man, you have levelled up!")
     while True:
-        statChoice = str(input("Enter your choice: "))
-        match statChoice:
-            case '1':
-                if confirm("Are you sure you want to level up attack? (y or n): ") == True:
-                    player.attack += 1
-                    break
-            case '2':
-                if confirm("Are you sure you want to level up defence? (y or n): ") == True:
-                    player.defence += 1
-                    break
-            case '3':
-                if confirm("Are you sure you want to level up charisma? (y or n): ") ==  True:
-                    player.charisma += 1
-                    break
-            case '4':
-                if confirm("Are you sure you want to level up intellect? (y or n): ") ==  True:
-                    player.intellect += 1
-                    break
-            case '5':
-                if confirm("Are you sure you want to level up agility? (y or n): ") ==  True:
-                    player.agility += 1
-                    break
+        slowType("What would you like to improve? You have one",level_point,"to spend.\n"
+        "A --- ATK"
+        "B --- DEF"
+        "C --- INT"
+        "D --- CHA"
+        "E --- AGI")
+        levelChoice=input()
+        match levelChoice:
+            case "a" | "atk" | "1":
+                self.attack += 1
+                slowType("You have levelled up your attack. Congratulations, may you clap the cheeks of your enemies. Your attack is now", self.attack,".")
+                break
+            case "b" | "def" | "2":
+                self.defence += 1
+                slowType("You have levelled up your defense. Congratulations, may you be able to tank more damage, you filthy masoschist. Your defense is now",self.attack,".")
+                break
+            case "c" | "int" | "3":
+                self.intellect += 1
+                slowType("You have levelled up your intellect. Congratulations, you are evolving from monke to ape, may your gorilla powers manifest themselves. Your intellect is now",self.intellect,".")
+                break
+            case "d" | "cha" | "4":
+                self.charisma += 1
+                slowType("You have levelled up your charisma. Congratulations, you sexy beast, the laws of physics bend to your way with words :flushed:. Your charisma is now",self.charisma,".")
+                break
+            case "e" | "agi" | "5":
+                self.agility += 1
+                slowType("You have levelled up your agility. Congratulations, you speedy boi, may you move faster than le jongleur eventually.",self.agility,".")
+                break
             case _:
-                c.red("Please input a number displayed.")        
+                c.red("Please select a valid option.")
                 time.sleep(1.5)
-    
+                screenClear()
+    pressEnter()
+    screenClear()
     print(stats(player))
     pressEnter()
     screenClear()

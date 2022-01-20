@@ -1,3 +1,5 @@
+from basics import screenClear
+import players as p
 
 def battle(player, opponent):
     battleOver = 0 #if 1, player lost. if 2, opponent lost.
@@ -6,8 +8,8 @@ def battle(player, opponent):
         dmgP = 0 #dmg done to player
         rand = 0 #the 'random' variable, see dmg calculator in any case below
         screenClear()
-        healthBar(player)
-        healthBar(opponent)
+        p.healthBar(player)
+        p.healthBar(opponent)
         print("\nWhat will you do?")
         c.red("Attack:")
         print("1)Swift punch to the face\n2)Drop kick strike.\n3)Break dance on the monkster.") #Change if you want but 1) light attack 2) medium attack 3) heavy attack
@@ -64,7 +66,9 @@ def battle(player, opponent):
 
         screenClear()
         print(choices) #REMOVE LATER
-        b.Dmg()
+
+        #maybe calculate dmg right here?
+
         match choices:
             case '1', 1: #player: punch, opp: punch
                 if r.randint(1,2) == 1:

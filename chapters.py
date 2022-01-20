@@ -1,4 +1,5 @@
 import colours as c
+import players as p
 from basics import screenClear, pressEnter, confirm, slowType
 import time
 from bigText import bigText
@@ -68,6 +69,7 @@ def c1():
 
     print("Would you like to preceed to the next chapter?")
     if confirm() == True:
+        p.autosave()
         c2()
 
 def c2():
@@ -78,6 +80,7 @@ def c2():
 
     print("Would you like to preceed to the next chapter?")
     if confirm() == True:
+        p.autosave()
         c3()
 
 def c3():
