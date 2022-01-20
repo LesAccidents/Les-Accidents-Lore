@@ -37,9 +37,9 @@ def savefile():
                         slotSelection = "menu"
                     break
 
-        #elif slotSelection.lower() == 'debug' or 'd':#REMOVE
-         #   b.battle(Hussein(), Hadi())
-          #  break
+        elif slotSelection.lower() == 'debug' or 'd':#REMOVE
+            b.battle(Hussein(), Hadi())
+            break
         
         if slotSelection == '1' or slotSelection == '2' or slotSelection == '3':
             try: #tries the value inputted

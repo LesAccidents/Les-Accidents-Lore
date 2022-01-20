@@ -1,5 +1,10 @@
-from basics import screenClear
+from basics import screenClear, slowType, pressEnter
 import players as p
+import colours as c
+import random as r
+
+#p.healthBar(player/oppoent)
+
 
 def battle(player, opponent):
     battleOver = 0 #if 1, player lost. if 2, opponent lost.
@@ -220,9 +225,9 @@ def battle(player, opponent):
             battleOver = 1  #if player is dead
             player.hp = 0
         print("\n\nYour HP:")
-        healthBar(player)
+        p.healthBar(player)
         print("\n"+opponent.name+"'s HP:")
-        healthBar(opponent)
+        p.healthBar(opponent)
 
         pressEnter()
 

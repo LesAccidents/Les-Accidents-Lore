@@ -3,7 +3,7 @@ import players as p
 from basics import screenClear, pressEnter, confirm, slowType
 import time
 from bigText import bigText
-import sound
+#import sound
 
 def c1():
     screenClear()
@@ -21,7 +21,7 @@ def c1():
     time.sleep(0.5)
     slowType("Les Accidents Inc. proudly presents:\n", 0.1)
     time.sleep(2.9)
-    sound.music("intro")
+    #sound.music("intro")
     bigText("LES ACCIDENTS:", "white", "doom")
     time.sleep(8.3)
     bigText("THE GAME", "red")

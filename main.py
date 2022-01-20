@@ -5,7 +5,7 @@ import players as p
 from players import save
 import time, os, sys, json
 from bigText import bigText
-import sound
+#import sound
 
 if p.savefile() == False:
     p.characterSelection()
