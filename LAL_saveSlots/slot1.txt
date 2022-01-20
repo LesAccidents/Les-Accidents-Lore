@@ -1,1 +1,0 @@
-{"player": [{"character": "Jacob", "level": 1, "xp": 0, "hp": 100, "attack": 2, "defence": 1, "charisma": 3, "intellect": 2, "agility": 5}], "progression": []}

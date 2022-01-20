@@ -1,4 +1,3 @@
-#import sys;print(sys.version)
 from basics import screenClear, pressEnter, confirm, slowType
 import colours as c
 import chapters as chap
@@ -6,7 +5,7 @@ import players as p
 from players import save
 import time, os, sys, json
 from bigText import bigText
-#import sound #MUSIC
+import sound
 
 if p.savefile() == False:
     p.characterSelection()

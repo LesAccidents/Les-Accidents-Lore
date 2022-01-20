@@ -1,8 +1,5 @@
-#A few important basic functions
-
-#import necessary libraries
 import os, sys, time, keyboard
-#basic functions
+
 def screenClear():  #screen clearing function
   # for mac and linux(here, os.name is 'posix')
     if os.name == 'posix':
@@ -22,13 +19,13 @@ def confirm(query="Are you sure? (y or n) "):
 
 def slowType(text, delay=0.03): #slowly prints text and skips to end if enter is pressed
     for letter in text:
-        #if keyboard.is_pressed('return'):  UNCOMMENT
-        #    unreturn = True
-        #    time.sleep(0.05)
-        #    delay = 0
-        #if unreturn == True:
-        #    letter = "\b" + letter
-        #    unreturn = False
+        if keyboard.is_pressed('return'):
+            unreturn = True
+            time.sleep(0.05)
+            delay = 0
+        if unreturn == True:
+            letter = "\b" + letter
+            unreturn = False
         sys.stdout.write(letter)
         sys.stdout.flush()
         time.sleep(delay)
