@@ -66,7 +66,7 @@ def battle(player, opponent):
                     dmgO += (2*(3*player.attack))
                 case '3':
                     slowType("\nYou set up your guard to \033[1;34;48mblock\033[1;37;48m incoming attacks.\n")
-                    dmgP -= (3*(3*player.defence))
+                    dmgP -= (4*(3*player.defence))
                 case '4':
                     slowType("\nYou prepare yourself to \033[1;34;48mdodge\033[1;37;48m.\n")
                     if r.randint(1,2) == 1:
@@ -88,7 +88,7 @@ def battle(player, opponent):
                     break
                 case 3:
                     slowType(opponent.name+" sets up his guard to \033[1;34;48mblock\033[1;37;48m.\n")
-                    dmgO -= (3*(3*opponent.defence))
+                    dmgO -= (4*(3*opponent.defence))
                     break
                 case 4:
                     slowType(opponent.name+" prepares to \033[1;34;48mdodge\033[1;37;48m.\n")
