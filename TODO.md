@@ -6,6 +6,7 @@ List of things to do / change
 Battle:
 - add agaility to play a role in Dodging
 - fix calculations for dmg and def
+- add events for running and hiding
 
 #Note: I've added a save() function in basics.py. Not sure if I should just dump the data directly in the function or not... (specifically on line 40 in main.py) - Jacob
 
