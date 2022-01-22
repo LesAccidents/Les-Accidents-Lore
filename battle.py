@@ -6,7 +6,7 @@ import time
 
 def battle(player, opponent):
     turn = 0
-    battleOver = 0 #if 1, player lost. if 2, opponent lost.
+    battleOver = 0 #if 1, lost. if 2, win.
     while battleOver == 0:
         while True:
             turn += 1
@@ -20,11 +20,11 @@ def battle(player, opponent):
             p.healthBar(opponent)
             print("\nWhat will you do?")
             c.red("Offensive:")
-            print("1)Quick light attack\n2)Strong heavy attack")
-            c.blue("Defensive:")
-            print("3)Block\n4)Dodge")
+            print("1) Light attack\n2) Heavy attack\n")
+            c.cyan("Defensive:")
+            print("3) Block\n4) Dodge\n")
             c.green("Miscellaneous:")
-            print("5)RUN RUN RUN\n6)HIDE HIDE HIDE")
+            print("5) Run")
             choices = []
             choices.append(str(input("\nEnter the number for the action you want to take: ")))
             
@@ -33,13 +33,7 @@ def battle(player, opponent):
                     choices.append(1) #you get caught
                 else:
                     choices.append(2) #you get away
-            elif choices[0] == '6': #if you hide
-                if player.intellect > opponent.intellect: #are you smarter?
-                    choices.append(1) #you hid well
-                else:
-                    choices.append(2) #you were found
-            elif choices[0].lower() == 's' or choices[0].lower() == 'stats':
-                choices[0] = 's'
+            
             else: #if you actually fight
                 rand = r.randint(1, 6)
                 match choices[0]:
@@ -74,8 +68,6 @@ def battle(player, opponent):
                         dodge = 1 #dodge successful
                     else:
                         dodge = 2 #dodge unsuccessful
-                case 's':
-                    stats(player)
 
             match choices[1]:
                 case 1:
