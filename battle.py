@@ -24,40 +24,30 @@ def battle(player, opponent):
             c.blue("Defensive:")
             print("3)Block\n4)Dodge")
             c.green("Miscellaneous:")
-            print("5)RUN RUN RUN\n6)HIDE HIDE HIDE")
+            print("5)RUN RUN RUN")
             choices = []
             choices.append(str(input("\nEnter the number for the action you want to take: ")))
             
-            if choices[0] == '5': #if you run
-                if player.agility < opponent.agility: #is opponent faster?
-                    choices.append(1) #you get caught
-                else:
-                    choices.append(2) #you get away
-            elif choices[0] == '6': #if you hide
-                if player.intellect > opponent.intellect: #are you smarter?
-                    choices.append(1) #you hid well
-                else:
-                    choices.append(2) #you were found
-            elif choices[0].lower() == 's' or choices[0].lower() == 'stats':
-                choices[0] = 's'
-            else: #if you actually fight
-                rand = r.randint(1, 6)
-                match choices[0]:
-                    case '1': #if you do a quick attack
-                        if rand == 5 or rand == 6:
-                            rand = 3 #more chance of blocking
-                    case '2': #if you do a heavy attack
-                        if rand == 5 or rand == 6:
-                            rand = 4 #more chance of dodging
-                    case '3': #if you do a block
-                        if rand == 5 or rand == 6:
-                            rand = 2 #more chance of heavy attack
-                    case '4': #if you do a dodge
-                        if rand == 5 or rand == 6:
-                            rand = 1 #more chance of quick attack
-                choices.append(rand)
+            #bot's brain
+            rand = r.randint(1, 6)
+            match choices[0]:
+                case '1': #if you do a quick attack
+                    if rand == 5 or rand == 6:
+                        rand = 3 #more chance of blocking
+                case '2': #if you do a heavy attack
+                    if rand == 5 or rand == 6:
+                        rand = 4 #more chance of dodging
+                case '3': #if you do a block
+                    if rand == 5 or rand == 6:
+                        rand = 2 #more chance of heavy attack
+                case '4': #if you do a dodge
+                    if rand == 5 or rand == 6:
+                        rand = 1 #more chance of quick attack
+                case _: #to prevent crashes if user runs away
+                    rand = r.randint(1, 4)
+            choices.append(rand)
 
-            match choices[0]: #heavy attacks give 3* attack, block five 3* defence
+            match choices[0]: #heavy attack is stronger, block reduces some damage
                 case '1':
                     slowType("\nYou preform a \033[1;31;48mquick attack\033[1;37;48m.\n")
                     dmgO += (3*player.attack)
@@ -71,11 +61,19 @@ def battle(player, opponent):
                     slowType("\nYou prepare yourself to \033[1;34;48mdodge\033[1;37;48m.\n")
                     if r.randint(1,2) == 1:
                         dmgP -= 1000
-                        dodge = 1 #dodge successful
+                        choices.append(5) #dodge successful
                     else:
-                        dodge = 2 #dodge unsuccessful
-                case 's':
-                    stats(player)
+                        choices.append(6) #dodge unsuccessful
+                case '5':
+                    slowType("You turn around and \033[1;33;48mrun\033[1;37;48m for the hills.")
+                    if player.agility < opponent.agility: #if you are slower, you have less chance of escaping
+                        rand = 3
+                    else:
+                        rand = 6
+                    if r.randint(1,rand) == 1:
+                        choices.append(7) #you get away
+                    else:
+                        choices.append(8) #you get caught            
 
             match choices[1]:
                 case 1:
@@ -103,10 +101,14 @@ def battle(player, opponent):
                     turn -= 1 
                     time.sleep(1.5)
 
-        if dodge == 1:
+        if choices[1] == 5:
             slowType("You successfully evade "+opponent.name+"'s attack.\n")
-        elif dodge == 2:
+        elif choices[1] == 6:
             slowType(opponent.name+" still manages to land a hit on you.\n")
+        elif choices[1] == 7:
+            slowType("You successfully ran away from "+opponent.name+" like the coward you are.")
+        elif choices[1] == 8:
+            slotType("You try to run away but "+opponent.name+" is catches up to you and drags you back to the fight.")
         if dmgO < 0:
             dmgO = 0
         if dmgP < 0:
